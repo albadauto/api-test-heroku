@@ -23,4 +23,18 @@ export default class PropertiesController {
             console.log(err);
         }
     }
+
+    public async index({ request, response }: HttpContextContract){
+        try{
+            const result = await Property.all();
+            if (result){
+                return response.status(200).json({
+                    message:"All ok",
+                    result
+                })
+            }
+        }catch(err){
+            console.log(err);
+        }
+    }
 }

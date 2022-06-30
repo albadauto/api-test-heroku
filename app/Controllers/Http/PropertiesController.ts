@@ -24,7 +24,7 @@ export default class PropertiesController {
         }
     }
 
-    public async index({ request, response }: HttpContextContract){
+    public async index({ response }: HttpContextContract){
         try{
             const result = await Property.all();
             if (result){

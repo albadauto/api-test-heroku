@@ -2,11 +2,7 @@
   "name": "api",
   "version": "1.0.0",
   "private": true,
-  "engines": {
-    "node": "16.15.1",
-    "yarn": "1.22.19",
-    "npm": "8.11.0"
-  },
+ 
   "scripts": {
     "dev": "node ace serve --watch",
     "build": "node ace build --production",

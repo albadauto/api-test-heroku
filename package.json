@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "engines": {
-    "node": "16.15.1"
+    "node": "16.15.1",
+    "yarn": "1.22.19"
   },
   "scripts": {
     "dev": "node ace serve --watch",

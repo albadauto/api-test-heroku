@@ -37,4 +37,23 @@ export default class PropertiesController {
             console.log(err);
         }
     }
+
+    public async show({response, params}: HttpContextContract){
+        try{
+            const result = await Property.findOrFail(params.id);
+            if(result){
+                return response.status(200).json({
+                    search: true,
+                    result
+                })
+            }else{
+                return response.status(400).json({
+                    search:false,
+                    message: "Não foi encontrado nenhum anúncio"
+                })
+            }
+        }catch(err){
+            console.log(err);
+        }
+    }
 }

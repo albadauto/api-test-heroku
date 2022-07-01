@@ -32,5 +32,6 @@ Route.group(() => {
   }).prefix("user")
 
   Route.resource("/properties", "PropertiesController").apiOnly();
+  Route.resource("/findAllPropertiesWithUser", "PropertiesController.findAllWithUser")
 }).prefix("api");
 

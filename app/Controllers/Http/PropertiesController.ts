@@ -2,6 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Application from "@ioc:Adonis/Core/Application";
 import Property from 'App/Models/Property';
 import uuid from "react-uuid";
+import Database from '@ioc:Adonis/Lucid/Database';
 export default class PropertiesController {
     public async store({ request, response }: HttpContextContract) {
         try {
@@ -9,7 +10,7 @@ export default class PropertiesController {
             const body = request.body();
             image!.fileName = `${uuid()}.${image?.extname}`
             if (image) {
-                await image.move(Application.tmpPath("uploads"), {name: image?.fileName}); // Application tmpPath -> Pasta tmp, parametro é a pasta uploads
+                await image.move(Application.tmpPath("uploads"), { name: image?.fileName }); // Application tmpPath -> Pasta tmp, parametro é a pasta uploads
                 await Property.create({ ...body, property_image: image?.fileName });
                 return response.status(200).json({
                     created: true,
@@ -24,35 +25,49 @@ export default class PropertiesController {
         }
     }
 
-    public async index({ response }: HttpContextContract){
-        try{
+    public async index({ response }: HttpContextContract) {
+        try {
             const result = await Property.all();
-            if (result){
+            if (result) {
                 return response.status(200).json({
-                    message:"All ok",
+                    message: "All ok",
                     result
                 })
             }
-        }catch(err){
+        } catch (err) {
             console.log(err);
         }
     }
 
-    public async show({response, params}: HttpContextContract){
-        try{
+    public async show({ response, params }: HttpContextContract) {
+        try {
             const result = await Property.findOrFail(params.id);
-            if(result){
+            if (result) {
                 return response.status(200).json({
                     search: true,
                     result
                 })
-            }else{
+            } else {
                 return response.status(400).json({
-                    search:false,
+                    search: false,
                     message: "Não foi encontrado nenhum anúncio"
                 })
             }
-        }catch(err){
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    public async findAllWithUser({ response }: HttpContextContract) {
+        try {
+            const propertySearch = await Database.from("properties")
+                .select("*")
+                .join("users", "users.id", "=", "properties.user_id")
+            return response.status(200).json({
+                error:false,
+                propertySearch
+            })
+        } catch (err) {
             console.log(err);
         }
     }

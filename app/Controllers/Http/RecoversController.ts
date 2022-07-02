@@ -6,23 +6,9 @@ export default class RecoversController {
 
     public async recoverPass({ response, request }: HttpContextContract){
         try{
-            const { email } = request.body();
-            const resultOfMail = await User.findBy("email", email);
-            if (resultOfMail){
-                const code = Math.random().toString(36).slice(-10);
-                this.SendMail(`Código de recuperação: ${code}`,
-                    "joseadauto923@hotmail.com",
-                    email,
-                    "Recuperação de senha IMOBI PROJECT"
-                )
-                return response.status(201).json({
-                    message:"Email com código de verificação enviado"
-                })
-            }else{
-                return response.status(400).json({
-                    message:"Não foi encontrado este email no nosso sistema."
-                })
-            }
+            const email = request.body();
+            console.log(email)
+            
         }catch(err){
             console.log(err);
         }

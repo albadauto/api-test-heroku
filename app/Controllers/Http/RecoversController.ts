@@ -1,10 +1,9 @@
 import Mail from '@ioc:Adonis/Addons/Mail';
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import User from 'App/Models/User';
 
 export default class RecoversController {
 
-    public async recoverPass({ response, request }: HttpContextContract){
+    public async recoverPass({  request }: HttpContextContract){
         try{
             const email = request.body();
             console.log(email)

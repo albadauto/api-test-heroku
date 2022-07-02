@@ -33,7 +33,7 @@ Route.group(() => {
 
   Route.resource("/properties", "PropertiesController").apiOnly();
   Route.get("/findAllPropertiesWithUser", "PropertiesController.findAllWithUser")
-  Route.get("/findAllPropertiesIdUser", "PropertiesController.findAllPropertiesIdUser");
+  Route.get("/findAllPropertiesIdUser/:id", "PropertiesController.findAllPropertiesIdUser");
 
   
 }).prefix("api");

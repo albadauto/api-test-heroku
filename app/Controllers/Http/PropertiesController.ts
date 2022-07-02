@@ -41,7 +41,12 @@ export default class PropertiesController {
 
     public async show({ response, params }: HttpContextContract) {
         try {
-            const result = await Property.findOrFail(params.id);
+            const result = await Database.from("properties")
+                .join("users", "users.id", "=", "properties.user_id")
+                .select("properties.*")
+                .select("users.name")
+                .select("users.email")
+                .where("properties.id", params.id)
             if (result) {
                 return response.status(200).json({
                     search: true,
@@ -65,7 +70,7 @@ export default class PropertiesController {
                 .select("properties.*")
                 .select("users.name")
             return response.status(200).json({
-                error:false,
+                error: false,
                 propertySearch
             })
         } catch (err) {

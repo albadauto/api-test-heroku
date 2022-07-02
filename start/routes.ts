@@ -38,6 +38,8 @@ Route.group(() => {
 
   Route.group(() => {
     Route.post("/recoverPass", "RecoversController.recoverPass")
+    Route.post("/verifyCode", "RecoversController.verifyCode")
+
   }).prefix("Recover")
 
   

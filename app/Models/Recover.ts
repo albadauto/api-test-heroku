@@ -6,10 +6,10 @@ export default class Recover extends BaseModel {
   public id: number
 
   @column()
-  public user_id
+  public user_id: number
 
   @column()
-  public code
+  public code: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

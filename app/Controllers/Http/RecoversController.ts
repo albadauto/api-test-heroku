@@ -1,5 +1,6 @@
 import Mail from '@ioc:Adonis/Addons/Mail';
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Recover from 'App/Models/Recover';
 import User from 'App/Models/User';
 
 export default class RecoversController {
@@ -8,8 +9,10 @@ export default class RecoversController {
         try{
             const { email } = request.body();
             const resultOfMail = await User.findBy("email", email);
+            const user_id = resultOfMail?.id;
             if (resultOfMail){
                 const code = Math.random().toString(36).slice(-10);
+                await Recover.create({code, user_id});
                 this.SendMail(`Código de recuperação: ${code}`,
                     "joseadauto923@hotmail.com",
                     email,

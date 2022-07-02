@@ -1,4 +1,4 @@
-import Mail from '@ioc:Adonis/Addons/Mail';
+//import Mail from '@ioc:Adonis/Addons/Mail';
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class RecoversController {
@@ -15,17 +15,17 @@ export default class RecoversController {
 
 
 
-    private async SendMail(content:string, from: string, to: string, subject:string){
-        try{
-            await Mail.send((message) => {
-                message
-                .from(from)
-                .to(to)
-                .subject(subject)
-                .text(content)
-            })
-        }catch(err){
-            console.log(err);
-        }
-    }
+    // private async SendMail(content:string, from: string, to: string, subject:string){
+    //     try{
+    //         await Mail.send((message) => {
+    //             message
+    //             .from(from)
+    //             .to(to)
+    //             .subject(subject)
+    //             .text(content)
+    //         })
+    //     }catch(err){
+    //         console.log(err);
+    //     }
+    // }
 }

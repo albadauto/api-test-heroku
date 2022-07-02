@@ -77,4 +77,21 @@ export default class PropertiesController {
             console.log(err);
         }
     }
+
+    public async findAllPropertiesIdUser({ response, params }: HttpContextContract){
+        try{
+            const propertySearch = await Database.from("properties")
+                                    .join("users", "users.id", "=", "properties.user_id")
+                                    .select("properties.*")
+                                    .where("properties.user_id", params.id);
+            if (propertySearch){
+                return response.status(200).json({
+                    error: false,
+                    propertySearch
+                })
+            }
+        }catch(err){
+            console.log(err);
+        }
+    }
 }

@@ -34,6 +34,8 @@ Route.group(() => {
   Route.resource("/properties", "PropertiesController").apiOnly();
   Route.get("/findAllPropertiesWithUser", "PropertiesController.findAllWithUser")
   Route.get("/findAllPropertiesIdUser/:id", "PropertiesController.findAllPropertiesIdUser");
+  Route.delete("/deleteProperty/:id", "PropertiesController.deleteProperty");
+
 
   
 }).prefix("api");

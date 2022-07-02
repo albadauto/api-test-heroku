@@ -78,19 +78,31 @@ export default class PropertiesController {
         }
     }
 
-    public async findAllPropertiesIdUser({ response, params }: HttpContextContract){
-        try{
+    public async findAllPropertiesIdUser({ response, params }: HttpContextContract) {
+        try {
             const propertySearch = await Database.from("properties")
-                                    .join("users", "users.id", "=", "properties.user_id")
-                                    .select("properties.*")
-                                    .where("properties.user_id", params.id);
-            if (propertySearch){
+                .join("users", "users.id", "=", "properties.user_id")
+                .select("properties.*")
+                .where("properties.user_id", params.id);
+            if (propertySearch) {
                 return response.status(200).json({
                     error: false,
                     propertySearch
                 })
             }
-        }catch(err){
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    public async deleteProperty({ response, params }: HttpContextContract) {
+        try {
+            const property = await Property.findOrFail(params.id);
+            await property.delete()
+            return response.status(200).json({
+                deleted: true
+            })
+        } catch (err) {
             console.log(err);
         }
     }

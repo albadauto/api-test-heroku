@@ -62,8 +62,8 @@ export default class PropertiesController {
         try {
             const propertySearch = await Database.from("properties")
                 .join("users", "users.id", "=", "properties.user_id")
+                .select("properties.*")
                 .select("users.name")
-                .select("users.id")
             return response.status(200).json({
                 error:false,
                 propertySearch
